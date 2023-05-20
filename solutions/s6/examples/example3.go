@@ -5,9 +5,8 @@ import (
 	"sync"
 )
 
-// Пример с завершением горутины, которая содержит бесконечный
-// цикл. Ее завершение происходит через проверку канала на
-// открытость - если возвращается false выполняется return.
+// Пример с завершением горутины, которая бесконечно случает
+// канал. Ее завершение происходит через закрытие канала.
 func RunEx3(count int) {
 	ch := make(chan int)
 
@@ -15,23 +14,19 @@ func RunEx3(count int) {
 	var wg sync.WaitGroup
 	wg.Add(1)
 
-	go printer2(count, ch, &wg)
+	go printer(count, ch, &wg)
 
 	for i := 0; i <= count; i++ {
 		ch <- i
 	}
-	close(ch) // закрываем канал
+	close(ch)
 	wg.Wait()
 }
 
-func printer2(count int, ch chan int, wg *sync.WaitGroup) {
+func printer(count int, ch chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	for {
-		v, ok := <-ch // ok хранит true/false когда канал открыт/закрыт.
-		if !ok {      // при выполнении условия - выход из горутины.
-			return
-		}
-		fmt.Println(v)
+	for s := range ch { // по закрытию канала завершается
+		fmt.Println(s) // цикл for range и горутина закрывается;
 	}
 }

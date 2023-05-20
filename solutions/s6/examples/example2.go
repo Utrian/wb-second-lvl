@@ -5,28 +5,40 @@ import (
 	"sync"
 )
 
-// Пример с завершением горутины, которая бесконечно случает
-// канал. Ее завершение происходит через закрытие канала.
+// Аналог первого примера, но с одним каналом;
+
 func RunEx2(count int) {
-	ch := make(chan int)
+	ch := make(chan string)
 
-	// Используем WaitGroup для корректного завершения горутины.
+	// Используем WaitGroup чтобы дождаться выполнения горутин;
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(2)
 
-	go printer(count, ch, &wg)
+	go sing2(ch, &wg)
 
-	for i := 0; i <= count; i++ {
-		ch <- i
-	}
-	close(ch)
+	go func(c int) {
+		defer wg.Done()
+
+		for i := 0; i < c; i++ {
+			fmt.Println(<-ch)
+		}
+		close(ch) // сигнал о выходе из горутины
+	}(count)
+
 	wg.Wait()
 }
 
-func printer(count int, ch chan int, wg *sync.WaitGroup) {
+func sing2(ch chan string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	for s := range ch { // по закрытию канала завершается
-		fmt.Println(s) // цикл for range и горутина закрывается;
+	w := []string{"Ели", "мясо", "мужики", "пивом", "запивали"}
+
+	for _, v := range w {
+		select {
+		case ch <- v:
+			continue
+		case <-ch: // выход из горутины sing2 происходит тут;
+			return
+		}
 	}
 }

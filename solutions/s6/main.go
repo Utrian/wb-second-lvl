@@ -8,7 +8,8 @@ import "github.com/wb-second-lvl/solutions/s6/examples"
 // Пакет tomb позволяет завершать горутину чисто
 
 func main() {
-	// examples.RunEx1(3)
+	examples.RunEx1(3)
 	// examples.RunEx2(3)
-	examples.RunEx3(3)
+	// examples.RunEx3(3)
+	// examples.RunEx4(3)
 }
