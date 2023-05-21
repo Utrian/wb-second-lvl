@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wb-second-lvl/solutions/s2/examples"
+	"github.com/wb-second-lvl/solutions/1-10/s2/examples"
 )
 
 func main() {

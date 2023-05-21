@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/wb-second-lvl/solutions/s9/examples"
+	"github.com/wb-second-lvl/solutions/1-10/s9/examples"
 )
 
 func main() {
