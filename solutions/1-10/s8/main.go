@@ -7,6 +7,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// Дана переменная int64. Разработать программу которая устанавливает i-й бит в
+// 1 или 0.
+
 func main() {
 	num := int64(500)
 

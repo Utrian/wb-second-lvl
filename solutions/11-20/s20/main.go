@@ -7,6 +7,9 @@ import (
 	"github.com/wb-second-lvl/solutions/11-20/s19/examples"
 )
 
+// Разработать программу, которая переворачивает слова в строке.
+// Пример: «snow dog sun — sun dog snow».
+
 func main() {
 	fmt.Println(reverseTheseWords("snow dog sun"))
 }

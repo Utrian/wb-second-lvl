@@ -4,6 +4,8 @@ import (
 	"github.com/wb-second-lvl/solutions/11-20/s11/examples"
 )
 
+// Реализовать пересечение двух неупорядоченных множеств.
+
 // Пересечения множеств
 func main() {
 	// Пример с реализацией множеств через map[string]bool

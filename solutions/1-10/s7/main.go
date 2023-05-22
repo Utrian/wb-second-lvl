@@ -5,7 +5,8 @@ import (
 	"sync"
 )
 
-// Конкурентная запись данных в map
+// Конкурентная запись данных в map.
+
 func main() {
 	fmt.Println("map:", do(10))
 }

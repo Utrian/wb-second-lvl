@@ -7,6 +7,7 @@ import (
 )
 
 // Создать множество из последовательности строк
+
 func main() {
 	s := []string{"cat", "cat", "dog", "cat", "tree"}
 
