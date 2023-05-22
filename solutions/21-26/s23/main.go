@@ -1,36 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/wb-second-lvl/solutions/21-26/s23/examples"
+)
 
 // Удалить i-ый элемент из слайса.
 func main() {
 	sl := []int{1, 2, 3, 4, 5, 6, 7}
-	fmt.Println(removeItem(sl, 3)) // [0 0 0 0 0 0]
-	fmt.Println(removeItem2(sl, 3))
+
+	// Пример с созданием нового слайса
+	new_sl1 := examples.RemoveItem(sl, 3)
+	fmt.Println(new_sl1, cap(new_sl1)) // [1 2 3 5 6 7] 6
+
+	new_sl1 = examples.RemoveItem(new_sl1, 3)
+	fmt.Println(new_sl1, cap(new_sl1)) // [1 2 3 6 7] 5
+
+	// Пример с заменой, смещением и изменением порядка
+	new_sl2 := examples.RemoveItem2(sl, 3)
+	fmt.Println(new_sl2, cap(new_sl2)) // [1 2 3 7 5 6] 7
+
+	new_sl2 = examples.RemoveItem2(new_sl2, 3)
+	fmt.Println(new_sl2, cap(new_sl2)) // [1 2 3 6 5] 7
 }
 
-// Отсечение элемента с сохранением последовательности.
-// pos - отсчет от 0
-func removeItem(sl []int, pos int) []int {
-	r := make([]int, 0, len(sl)-1)
-
-	// Берем нужные участки
-	r = append(r, sl[:pos]...)
-	r = append(r, sl[pos+1:]...)
-
-	return r
-}
-
-// Отсечение элемента с изменением последовательности.
-func removeItem2(sl []int, pos int) []int {
-	// Копируем в место удаляемого последний элемент.
-	sl[pos] = sl[len(sl)-1]
-	// Берем срез без скопированного элемента.
-	sl = sl[:len(sl)-1]
-
-	return sl
-}
-
-// Данный пример не очень хороший, потому что изначальный
-// массив, на который ссылался слайс остался неизменным,
-// и соответственно он занимает тот же объем памяти.
+// Как видим по capacity во втором варианте после
+// изменения слайса он все еще ссылается на изначальный массив.
+// Данную реализацию можно изменить чтобы оставить порядок
+// но смысла из-за недостатка выше в этом особого смысла нет.
