@@ -1,6 +1,10 @@
 package main
 
-// https://gobyexample.com/worker-pools
+import (
+	"fmt"
+
+	"github.com/wb-second-lvl/solutions/1-10/s4/wpool"
+)
 
 // Реализовать постоянную запись данных в канал (главный поток). Реализовать
 // набор из N воркеров, которые читают произвольные данные из канала и
@@ -8,3 +12,23 @@ package main
 // старте.
 // Программа должна завершаться по нажатию Ctrl+C. Выбрать и обосновать
 // способ завершения работы всех воркеров.
+
+func main() {
+	wpool.WorkerPoolInt(5, genNums, print)
+}
+
+// Функция которую воркеры будут использовать
+// по отношению к получаемым данным
+func print(num int) {
+	fmt.Println(num)
+}
+
+// Функция для постоянной записи данных в канал
+func genNums(ch chan int) {
+	count := 0
+
+	for {
+		count++
+		ch <- count
+	}
+}
