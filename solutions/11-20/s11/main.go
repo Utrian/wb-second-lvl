@@ -17,8 +17,9 @@ func main() {
 	// позволяет тратить меньше памяти.
 	examples.RunEx2()
 
-	// В качестве еще примеров - можно использовать готовое
-	// решение: https://github.com/deckarep/golang-set
+	// Уже готовая реализация множества
+	// https://github.com/deckarep/golang-set
+	examples.RunEx3()
 
 	// И есть еще в стандартной библиотеке множество int
 	// "golang.org/x/tools/container/intsets"
